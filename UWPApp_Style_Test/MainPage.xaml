@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="UWPApp_Style_Test.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPApp_Style_Test"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!--定义当前页面 整体风格 只能在当前页面使用-->
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MyResourceDictionary.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+        <!--局部style 不能和外部style同时使用 -->
+        <!--
+        <SolidColorBrush Color="Black" x:Key="MyBrush"></SolidColorBrush>
+        <SolidColorBrush Color="Blue" x:Key="MyBrush2"></SolidColorBrush>
+        <x:String x:Key="MyString"> Hello Button</x:String>
+        <Style TargetType="Button" x:Key="MyButtonStyle">
+            <Setter Property="Background" Value="Beige" ></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        -->
+        
+    </Page.Resources>
+
+ 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel VerticalAlignment="Center">
+            <!--使用局部style-->
+            <!--
+            <Button Name="MyButton" Content="{StaticResource MyString}" Foreground="{StaticResource MyBrush}" Background="{StaticResource MyBrush2}"></Button>
+            <Button Name="MyButton2" Content="My Style Button" Foreground="{StaticResource MyBrush}" Background="{StaticResource MyBrush2}"></Button>
+            <Button Content="{StaticResource MyString}" Style="{StaticResource MyButtonStyle}"></Button>
+            -->
+            <!--使用 全局定义的风格 在app.xaml 中定义-->
+            <Button Content="{StaticResource MyAppString}" Style="{StaticResource MyAppStyle}"></Button>
+            <!-- 使用外部MyResourceDictionary 的style-->
+            
+            <Button Content="{StaticResource MyDictionaryString}" Style="{StaticResource MyDictionaryStyle}"></Button>
+            <!--系统主题-->
+            <TextBlock Text="System Theme" Style="{StaticResource BaseTextBlockStyle}" FontSize="25"></TextBlock>
+            <!--系统主题原来systemcolorwindowcolor 改成了SystemControlBackgroundAltHighBrush 
+                systemaccentcolor改成了systemcontrolbackgroudaccentbrush 
+                爆伯的视频中api 已经老了
+            -->
+            <Rectangle  Width="100" Height="100" Fill="{ThemeResource SystemControlBackgroundAccentBrush}"></Rectangle>
+            <Rectangle  Width="100" Height="100" Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"></Rectangle>
+        </StackPanel>
+    </Grid>
+</Page>
